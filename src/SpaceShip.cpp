@@ -1,7 +1,7 @@
 #include "SpaceShip.h"
 #include "Util.h"
 
-SpaceShip::SpaceShip(): m_maxSpeed(10.0f)
+SpaceShip::SpaceShip()
 {
 	TextureManager::Instance()->load("../Assets/textures/spaceship.png", "spaceship");
 
@@ -14,6 +14,7 @@ SpaceShip::SpaceShip(): m_maxSpeed(10.0f)
 	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->isColliding = false;
 	setType(SPACE_SHIP);
+	setMaxSpeed(10.0f);
 	setOrientation(glm::vec2(0.0f, -1.0f));
 	setRotation(0.0f);
 }
@@ -24,7 +25,7 @@ SpaceShip::~SpaceShip()
 void SpaceShip::draw()
 {
 	TextureManager::Instance()->draw("spaceship", 
-		getTransform()->position.x, getTransform()->position.y, 0, 255, true);
+		getTransform()->position.x, getTransform()->position.y, m_rotationAngle, 255, true);
 
 	Util::DrawLine(getTransform()->position, (getTransform()->position + m_orientation * 60.0f));
 }
